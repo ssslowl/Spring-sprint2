@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="index.html">
+
+<div layout:fragment="mainFragment">
+    <h1 style="color: red"  th:if="${request.getHandled() == false}">*** Необработанная заявка ***</h1>
+    <h2>Изменить заявку</h2>
+    <form action="/handleRequest" method="post">
+        <input type="text" style="display: none" th:value="${request.getId()}" name="id" class="form-control" id="requsetId" readonly>
+        <div class="form-group">
+            <label for="inputName">Имя</label>
+            <input type="text" th:value="${request.getUserName()}" name="userName" class="form-control" id="inputName" placeholder="Введите ваше имя"  readonly>
+        </div>
+        <div class="form-group">
+            <label for="inputCourse">Курс</label>
+            <input type="text" th:value="${request.getCourseName()}" name="courseName" class="form-control" id="inputCourse" placeholder="Введите название курса"  readonly>
+        </div>
+        <div class="form-group">
+            <label for="inputQuestion">Вопрос</label>
+            <textarea class="form-control"  id="inputQuestion" rows="3" name="commentary" placeholder="Введите ваш вопрос" th:text="${request.getCommentary()}" readonly>Text value</textarea>
+        </div>
+        <div class="form-group">
+            <label for="inputPhone">Номер телефона</label>
+            <input type="tel" class="form-control" th:value="${request.getPhone()}"  name = "phone" id="inputPhone" placeholder="Введите ваш номер телефона"  readonly>
+        </div>
+        <button type="submit" class="btn btn-success">Обработать</button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Удалить заявку</button>
+
+    </form>
+
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Подтверждение удаления</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите удалить эту заявку?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <form action="/deleteRequest" method="post">
+                        <input type="text" style="display: none" th:value="${request.getId()}" name="id" class="form-control" id="requsetId" readonly>
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

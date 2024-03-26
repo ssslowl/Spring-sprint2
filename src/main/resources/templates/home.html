@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="index.html">
+
+<div layout:fragment="mainFragment">
+
+    <div class="row" th:each="req, iterStat : ${requests}" th:if="${iterStat.index % 2 == 0}">
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <p style="color: red" th:if="${req.getHandled() == false}" th:text="'*(Новая)'">*(Новая)</p>
+                    <h5 class="card-title" th:text="'Заявка от ' + ${req.getUserName()}">Заявка от Имя Человека</h5>
+                    <p class="card-text" th:text="'Курс: ' + ${req.getCourseName()}">Курс: Название курса</p>
+                    <p class="card-text" th:text="'Вопрос ' + ${req.getCommentary()}">Вопрос: Текст вопроса</p>
+                    <p class="card-text" th:text="'Номер телефона: ' + ${req.getPhone()}">Номер телефона: +1234567890</p>
+                    <a th:href="'/handleRequest?id=' + ${req.getId()}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" th:if="${iterStat.index < requests.size()-1}">
+            <div class="card" th:with="secReq = ${requests[iterStat.index + 1]}">
+                <div class="card-body">
+                    <p style="color: red" th:if="${secReq.getHandled() == false}" th:text="'*(Новая)'">*(Новая)</p>
+                    <h5 class="card-title" th:text="'Заявка от ' + ${secReq.getUserName()}">Заявка от Имя Человека</h5>
+                    <p class="card-text" th:text="'Курс: ' + ${secReq.getCourseName()}">Курс: Название курса</p>
+                    <p class="card-text" th:text="'Вопрос ' + ${secReq.getCommentary()}">Вопрос: Текст вопроса</p>
+                    <p class="card-text" th:text="'Номер телефона: ' + ${secReq.getPhone()}">Номер телефона: +1234567890</p>
+                    <a th:href="'/handleRequest?id=' + ${secReq.getId()}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    <div class="row" th:each="requestChunk : ${#lists.chunked(requests, 2)}">-->
+<!--        <div th:each="request : ${requestChunk}" class="col-md-6">-->
+<!--            <div class="card">-->
+<!--                <div class="card-body">-->
+<!--                    <h5 class="card-title" th:text="'Заявка от ' + ${request.name}"></h5>-->
+<!--                    <p class="card-text" th:text="'Курс: ' + ${request.course}"></p>-->
+<!--                    <p class="card-text" th:text="'Вопрос: ' + ${request.question}"></p>-->
+<!--                    <p class="card-text" th:text="'Номер телефона: ' + ${request.phone}"></p>-->
+<!--                    <a href="#" class="btn btn-primary">Подробнее</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+
+<!--    <div class="row">-->
+<!--        <div class="col-md-6">-->
+<!--            <div class="card">-->
+<!--                <div class="card-body">-->
+<!--                    <h5 class="card-title"><p style="color: red">*(Новая)</p>Заявка от Имя Человека</h5>-->
+<!--                    <p class="card-text">Курс: Название курса</p>-->
+<!--                    <p class="card-text">Вопрос: Текст вопроса</p>-->
+<!--                    <p class="card-text">Номер телефона: +1234567890</p>-->
+<!--                    <a href="#" class="btn btn-primary">Подробнее</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-6">-->
+<!--            <div class="card">-->
+<!--                <div class="card-body">-->
+<!--                    <h5 class="card-title">Заявка от Имя Человека</h5>-->
+<!--                    <p class="card-text">Курс: Название курса</p>-->
+<!--                    <p class="card-text">Вопрос: Текст вопроса</p>-->
+<!--                    <p class="card-text">Номер телефона: +1234567890</p>-->
+<!--                    <a href="#" class="btn btn-primary">    Подробнее</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+</div>
+</html>
