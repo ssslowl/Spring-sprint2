@@ -19,6 +19,14 @@ public class RequestService {
 
     public List<ApplicationRequest> getRequests(){return  requestRepository.findAll();}
 
+    public List<ApplicationRequest> getHandledRequests(){
+        return requestRepository.FindAllByHandled(true);
+    }
+
+    public List<ApplicationRequest> getUnhandledRequests(){
+        return requestRepository.FindAllByHandled(false);
+    }
+
 
     public ApplicationRequest addRequest(ApplicationRequest request){
         return  requestRepository.save(request);

@@ -27,6 +27,22 @@ public class MainController {
 
         return "home";
     }
+    @GetMapping("/handled")
+    public String handled(Model model){
+
+        List<ApplicationRequest> requests = requestService.getHandledRequests();
+        model.addAttribute("requests", requests);
+
+        return "home";
+    }
+    @GetMapping("/unhandled")
+    public String unhandled(Model model){
+
+        List<ApplicationRequest> requests = requestService.getUnhandledRequests();
+        model.addAttribute("requests", requests);
+
+        return "home";
+    }
 
     @GetMapping("/addRequest")
     public String addRequest(){

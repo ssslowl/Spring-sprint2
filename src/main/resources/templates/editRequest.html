@@ -5,7 +5,7 @@
     <h1 style="color: red"  th:if="${request.getHandled() == false}">*** Необработанная заявка ***</h1>
     <h2>Изменить заявку</h2>
     <form action="/handleRequest" method="post">
-        <input type="text" style="display: none" th:value="${request.getId()}" name="id" class="form-control" id="requsetId" readonly>
+        <input type="text" style="display: none" th:value="${request.getId()}" name="id" class="form-control" id="requestId" readonly>
         <div class="form-group">
             <label for="inputName">Имя</label>
             <input type="text" th:value="${request.getUserName()}" name="userName" class="form-control" id="inputName" placeholder="Введите ваше имя"  readonly>
@@ -22,7 +22,7 @@
             <label for="inputPhone">Номер телефона</label>
             <input type="tel" class="form-control" th:value="${request.getPhone()}"  name = "phone" id="inputPhone" placeholder="Введите ваш номер телефона"  readonly>
         </div>
-        <button type="submit" class="btn btn-success">Обработать</button>
+        <button type="submit" th:if="${request.getHandled() == false}" class="btn btn-success">Обработать</button>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Удалить заявку</button>
 
     </form>
@@ -42,7 +42,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                     <form action="/deleteRequest" method="post">
-                        <input type="text" style="display: none" th:value="${request.getId()}" name="id" class="form-control" id="requsetId" readonly>
+                        <input type="text" style="display: none" th:value="${request.getId()}" name="id" class="form-control" id="Id" readonly>
                         <button type="submit" class="btn btn-danger">Удалить</button>
                     </form>
                 </div>
